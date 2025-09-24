@@ -42,16 +42,6 @@ const DataDisplay = ({ data, onSelectionChange }) => {
 
   // Filtrer les données
   const filteredData = data.filter(item => {
-    // Filtrer les lignes sans titre ou sans image
-    const imageField = Object.keys(item).find(key => key.toLowerCase().includes('image'))
-    const nomField = Object.keys(item).find(key => key.toLowerCase().includes('nom') || key.toLowerCase().includes('produit'))
-
-    // Exclure si pas de titre ou pas d'image
-    if (!(nomField && item[nomField] && item[nomField].trim()) ||
-        !(imageField && item[imageField] && item[imageField].trim())) {
-      return false
-    }
-
     // Filtre par catégorie
     if (selectedCategory !== 'all' && categoryField && item[categoryField] !== selectedCategory) {
       return false

@@ -62,7 +62,16 @@ export const parseCSV = (csvText) => {
         headers.forEach((header, index) => {
           row[header] = values[index]
         })
-        data.push(row)
+
+        // Vérifier que la ligne a un titre ET une image
+        const imageField = Object.keys(row).find(key => key.toLowerCase().includes('image'))
+        const nomField = Object.keys(row).find(key => key.toLowerCase().includes('nom') || key.toLowerCase().includes('produit'))
+
+        // N'ajouter que si la ligne a un titre et une image non vides
+        if ((nomField && row[nomField] && row[nomField].trim()) &&
+            (imageField && row[imageField] && row[imageField].trim())) {
+          data.push(row)
+        }
       }
     }
   }

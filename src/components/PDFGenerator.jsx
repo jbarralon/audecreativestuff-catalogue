@@ -27,17 +27,7 @@ const PDFGenerator = ({ data, selectedIndices }) => {
     setGenerating(true)
 
     try {
-      const selectedData = data
-        .filter((_, index) => selectedIndices.includes(index))
-        .filter(item => {
-          // Filtrer les lignes qui ont au moins un titre et une image
-          const imageField = Object.keys(item).find(key => key.toLowerCase().includes('image'))
-          const nomField = Object.keys(item).find(key => key.toLowerCase().includes('nom') || key.toLowerCase().includes('produit'))
-
-          // Vérifier que la ligne a un titre et une image non vides
-          return (nomField && item[nomField] && item[nomField].trim()) &&
-                 (imageField && item[imageField] && item[imageField].trim())
-        })
+      const selectedData = data.filter((_, index) => selectedIndices.includes(index))
 
       if (selectedData.length === 0) {
         alert('Veuillez sélectionner au moins un produit')
@@ -103,8 +93,8 @@ const PDFGenerator = ({ data, selectedIndices }) => {
             return `
               <div style="width: 100%; display: flex; gap: 10px; min-height: 40mm; page-break-inside: avoid; box-sizing: border-box; font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 8px 0;">
                 ${imageField && item[imageField] ? `
-                  <div style="flex-shrink: 0; width: 60mm; height: 40mm; overflow: hidden; border-radius: 8px; background: #f5f5f5;">
-                    <img src="${item[imageField]}" style="width: 100%; height: 100%; object-fit: cover;" />
+                  <div style="flex-shrink: 0; width: 60mm; height: 40mm; overflow: hidden; border-radius: 8px; background: #f5f5f5; display: flex; align-items: center; justify-content: center;">
+                    <img src="${item[imageField]}" style="width: 100%; height: auto; object-fit: contain;" />
                   </div>` :
                   `<div style="flex-shrink: 0; width: 60mm; height: 40mm; background: #f5f5f5; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999;">
                     <span style="font-size: 11px; font-family: 'Poppins', sans-serif;">Pas d'image</span>
