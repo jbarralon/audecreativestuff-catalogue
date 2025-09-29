@@ -6,7 +6,7 @@ const DataDisplay = ({ data, onSelectionChange }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const itemsPerPage = 10
+  const itemsPerPage = 50
 
   const formatDescription = (description) => {
     if (!description) return ''

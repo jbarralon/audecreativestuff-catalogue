@@ -69,13 +69,13 @@ function App() {
               </button>
             </div>
 
-            <DataDisplay
-              data={csvData}
-              onSelectionChange={setSelectedIndices}
-            />
             <PDFGenerator
               data={csvData}
               selectedIndices={selectedIndices}
+            />
+            <DataDisplay
+              data={csvData}
+              onSelectionChange={setSelectedIndices}
             />
           </>
         )}
